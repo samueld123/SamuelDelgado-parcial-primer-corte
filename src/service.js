@@ -42,42 +42,37 @@
 class RickAndMortyService {
     // el constructor debe inicializar una variable con la url de acceso base al API
 
-	constructor() {}
+	constructor() {
+        this.myUrl = "https://rickandmortyapi.com/api/character";
+    }
 
-    
-    // este método deberá llamar al servicio y obtener los personajes
-    // deberá devolver un objeto de la siguiente manera
+	async getAllCharacters() {
+        try{
+            const response = await fetch(this.myUrl);
+            const data = await response.json();
 
-    // {
-    //     "name": "Rick Sanchez",
-    //     "status": "Alive",
-    //     "species": "Human",
-    //     "firstSeen": "Earth",
-    //     "location": "Earth",
-    //     "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-    //     "student": "aqui va el nombre del estudiante",
-    //     "code": "aqui va el codigo del estudiante"
-    // }
+            if (response.ok){
+                const characters = data.results.map(character => ({
+                    name: character.name,
+                    status: character.status,
+                    species: character.species,
+                    firstSeen: character.origin.name,
+                    location: character.location.name,
+                    image: character.image,
+                    student: "Samuel David Delgado Morales",
+                    code: "200019"
+                }));
 
-    // deberá realizar el respectivo manejo de error en caso de errores al llamar el API
-    // se recomienda usar el api fetch para obtener los datos como en el siguiente ejemplo  
-
-    // ejemplo con promesas
-
-    // fetch('miurl')
-    //  .then((respuesta) => respuesta.json())
-    //  .then((mispersonajes) => {
-    //     //aqui dentro mi logica
-    //  })
-
-    //  ejemplo con async/await
-
-    //  const response = await fetch('miurl');
-    //  const mispersonajes = await response.json();
-
-    // valor (1 punto)
-	getAllCharacters() {
-        // aqui va tu llamado al API usando fetch puedes usar promesas o asycn/await
+                return characters;
+            }
+            else{
+                throw new Error("Ha ocurrido el siguiente error al traer a los personajes:". data.error);
+            }
+        }
+        catch (error){
+            console.error("Ocurrió un error al traer los personajes", error);
+            throw error;
+        }
 	}
 }
 

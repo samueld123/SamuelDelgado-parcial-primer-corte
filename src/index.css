@@ -5,13 +5,87 @@
     --character-color: #3B3E43; /* color del card del personaje */
     --primary-font-color: #F5F5F5; /* color fuente principal */
     --secondary-font-color: #67686B; /* color fuente secundaria */
-    --alive: #54CB44; /* color personaje vivo */
+    --Alive: #54CB44; /* color personaje vivo */
     --unknown: #9E9E9E; /* color personaje desconocido */
-    --dead: #D63D2E; /* color personaje 💀 */
+    --Dead: #D63D2E; /* color personaje 💀 */
     --font: -apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'; /* fuente principal */
 }
-
-.character-list {
-    /* ejemplo de uso de variables con css */
+body{
     background-color: var(--character-list-color);
+    display: flex;
+    justify-content: center;
+    padding: 30px;
 }
+
+#container-list{
+    padding: 5px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+    grid-auto-rows: minmax(100px, 1fr);
+}
+
+
+.character-card {
+    background-color: var(--character-color);
+    display: flex;
+    width: 30vw;
+    font-family: var(--font);
+    border-radius: 10px;
+    align-items: center;
+}
+
+.character-desc {
+    margin-left: 10px;
+    font-size: 13px;
+
+}
+
+img{
+    width: 12vw;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+p{
+    color: var(--secondary-font-color);
+    font-size: 1.5vh;
+}
+
+.character-name{
+    color: var(--primary-font-color);
+    font-weight: bold;
+    font-size: 1.8vh;
+}
+
+.character-data{
+    color: var(--primary-font-color);
+}
+
+.character-locations{
+    color: var(--primary-font-color);
+    font-size: 1.5vh;
+}
+
+.dot{
+    height: 8px;
+    width: 8px;
+    background-color: var(--primary-font-color);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 4px;    
+}
+
+@media (max-width: 600px) {
+    #container-list { grid-template-columns: repeat(1, 1fr); }
+    .character-card { width: 78vw; }
+    
+    img{
+        height: 22.5671vh;
+        width: auto;
+    }
+  }
+
+  @media (min-width: 1080px) {
+    #container-list { grid-template-columns: repeat(3, 1fr); }
+  }
